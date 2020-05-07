@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: posts-depl
+  name: comments-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: posts
+      app: comments
   template:
     metadata:
       labels:
-        app: posts
+        app: comments
     spec:
       containers:
-        - name: posts
-          image: yoshijifujiwara/posts
+        - name: comments
+          image: yoshijifujiwara/comments
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: posts-clusterip-srv
+  name: comments-srv
 spec:
   selector:
-    app: posts
+    app: comments
   # デフォルトでClusterIP
   # type: ClusterIP
   ports:
-    - name: posts
+    - name: comments
       protocol: TCP
-      port: 4000
-      targetPort: 4000 # posts/index.jsで4000をlistenしてるから
+      port: 4001
+      targetPort: 4001
